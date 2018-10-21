@@ -43,7 +43,7 @@ class AssetEntityForm extends ContentEntityForm {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Call the original validateForm function.
     $entity = parent::validateForm($form, $form_state);
-
+/*
     // Guardian IF ensuring that we are looking at an Asset Entity.
     if ($entity instanceof AssetEntity) {
       // Check the price to ensure it's a valid number or is blank.
@@ -75,7 +75,7 @@ class AssetEntityForm extends ContentEntityForm {
          *
          * Variable $entity->id() will be empty when an asset is first created
          * so this will not trigger.
-         */
+         *//*
         if ($entity->id() === $child_asset->id()) {
           $form_state->setErrorByName('circular_dependency',
             $this->t('An asset is not permitted to be a child of itself.'));
@@ -98,7 +98,7 @@ class AssetEntityForm extends ContentEntityForm {
             $this->t('There is a cirular relationship which is not permitted.'));
         }
       }
-    }
+    }*/
 
     return $entity;
   }
@@ -139,7 +139,7 @@ class AssetEntityForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $entity = $this->entity;
-
+/*
     // Set initial value of parent changed to false to cover entity creation.
     $parent_changed = FALSE;
     $children_changed = FALSE;
@@ -157,7 +157,7 @@ class AssetEntityForm extends ContentEntityForm {
       $changed_children_list = $this->checkChildrenChange($current_asset, $form_state->getValue('child_related_assets'));
       $children_changed = count($changed_children_list) === 0 ? FALSE : TRUE;
 
-    }
+    }*/
 
     // Save as a new revision if requested to do so.
     if (!$form_state->isValueEmpty('new_revision') && $form_state->getValue('new_revision') != FALSE) {
@@ -187,7 +187,7 @@ class AssetEntityForm extends ContentEntityForm {
         ]));
     }
     $form_state->setRedirect('entity.asset_entity.canonical', ['asset_entity' => $entity->id()]);
-
+/*
     // Reload the current asset.
     $current_asset = AssetEntity::load($entity->id());
 
@@ -226,7 +226,7 @@ class AssetEntityForm extends ContentEntityForm {
     // Automatically deal with assets if children change.
     if ($children_changed) {
       $this->removeParentFromChildren($changed_children_list);
-    }
+    }*/
   }
 
   /**
